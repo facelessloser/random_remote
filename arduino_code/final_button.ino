@@ -1,29 +1,23 @@
-#include <IRremote.h>
-IRsend irsend;
-const int ledPin =  8;      // the number of the LED pin
+#include <IRremote.h> // IR library
+IRsend irsend; // Initiate IR library
+const int ledPin =  8; // the number of the LED pin
 
-// Button one 
+// Button code 
 const int button_one = 12; // Button set to pin 5
 unsigned long time_button_one = 0; // the last time the output pin was toggled
 unsigned long debounce_one = 200; // the debounce time, increase if the output flickers
 int reading_button_one; // the current reading from the input pin
 int previous_button_one = HIGH; // the previous reading from the input pin
 
-int ledState = LOW;         // the current state of the output pin
-
-long randNumber;
-long first;
-long second;
-long third;
-long unsigned int randomList[3];
-long unsigned int irList[] = {0xC00C00,0xC00C01,0xC00C02,0xC00C03,0xC00C04,0xC00C05,0xC00C06,0xC00C07,0xC00C08,0xC00C09}; 
+long unsigned int randomList[3]; // Random number array
+long unsigned int irList[] = {0xC00C00,0xC00C01,0xC00C02,0xC00C03,0xC00C04,0xC00C05,0xC00C06,0xC00C07,0xC00C08,0xC00C09}; // IR channel list
+long unsigned int channelListFirst[] = {0,1,2,3,5,6}; // First random number pick array
+long unsigned int channelListSecondIfThree[] = {5,6,7,8,9}; // Second random number pick if the first number is 3
 
 void setup(){
-  Serial.begin(9600);
-  Serial.println("-------------");
+  Serial.begin(9600); // Start serial
   pinMode(button_one, INPUT_PULLUP); // Set the button as input
-//  digitalWrite(button_one, HIGH); // initiate the internal pull up resistor
-  pinMode(ledPin, OUTPUT);
+  pinMode(ledPin, OUTPUT); // Set the IR LED as output
   // if analog input pin 0 is unconnected, random analog
   // noise will cause the call to randomSeed() to generate
   // different seed numbers each time the sketch runs.
@@ -32,54 +26,48 @@ void setup(){
 }
 
 void loop() {
-  // print a random number from 0 to 299
-//  randNumber = random(300);
-//  Serial.println(randNumber);  
 
-  // print a random number from 10 to 19
-//  randNumber = random(101, 279);
-//  Serial.println(randNumber);
-//  first=randNumber/100;
-//  second=randNumber%100/10;
-//  third=randNumber%10;
-//  Serial.println(first);
-//  Serial.println(second);
-//  Serial.println(third);
-//  randomList[0] = first;
-//  randomList[1] = second;
-//  randomList[2] = third;
-//  int i;
-//  for (i = 0; i < 3; i = i + 1){
-//    Serial.println(randomList[i]);
-//    delay(500);
-//    }
-//
-//  delay(500);
-  reading_button_one = digitalRead(button_one);
-
+  reading_button_one = digitalRead(button_one); // Read button pin for a press
   if (reading_button_one == HIGH && previous_button_one == LOW && millis() - time_button_one > debounce_one) 
   { 
     time_button_one = millis(); 
-//    digitalWrite(ledPin, HIGH);
-    ledState = !ledState;
-    randNumber = random(101, 279);
-    Serial.println(randNumber);
-    first=randNumber/100;
-    second=randNumber%100/10;
-    third=randNumber%10;
-    randomList[0] = first;
-    randomList[1] = second;
-    randomList[2] = third;
-    int i;
-    for (i = 0; i < 3; i = i + 1){
-      Serial.println(randomList[i]);
-      irsend.sendRC6(irList[randomList[i]], 24);
-      delay(500);
+    Serial.println("-------------"); // Print to serial
+    digitalWrite(ledPin, HIGH); // Turn LED on
+
+    randomList[0] = channelListFirst[random(1,5)]; // Use random number to pick number from channel array then add to random array
+
+//    Serial.print("First "); // Print to serial
+//    Serial.println(randomList[0]); // Print to serial
+
+    if (randomList[0] == 3)
+    {
+//      Serial.println("if"); // Print to serial
+      randomList[1] = channelListSecondIfThree[random(0, 4)]; // Use random number to pick number from channel array then add to random array
+//      Serial.print("Second "); // Print to serial
+//      Serial.println(randomList[1]); // Print to serial
     }
-//    irsend.sendRC6(0xC00C06, 24);
+    else
+    {
+//      Serial.println("else"); // Print to serial
+      randomList[1] = random(0, 9); // Add random number to random array
+//      Serial.print("Second "); // Print to serial
+//      Serial.println(randomList[1]); // Print to serial
+    }
+
+    randomList[2] = random(0, 9); // Add random number to random array
+//    Serial.print("Third "); // Print to serial
+//    Serial.println(randomList[2]); // Print to serial
+
+    Serial.println("-------------"); // Print to serial
+    int i;
+    for (i = 0; i < 3; i = i + 1){ // For loop to loop thought random array
+      Serial.println(randomList[i]); // Print to serial
+      irsend.sendRC6(irList[randomList[i]], 24); // Send to IR LED
+      delay(500); // Dirty delay
+    }
   }
   previous_button_one = reading_button_one;
 
-  digitalWrite(ledPin, ledState);
+  digitalWrite(ledPin, LOW); // Turn LED off
 }
 
