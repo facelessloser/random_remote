@@ -54,9 +54,9 @@ void event1()
   buttonPushCounter1++;
   runOnce = true;
   
-  if (buttonPushCounter1 == 5) 
+  if (buttonPushCounter1 == 6) 
   {
-    buttonPushCounter1 = 0;
+    buttonPushCounter1 = 1;
   }
 }
 
@@ -87,7 +87,6 @@ void event2()
     delay(200); // Dirty delay
     }
     digitalWrite(ledPin1, LOW);
-
   
 }
 
@@ -149,7 +148,7 @@ void loop()
 
   buttonLast = buttonVal;
 
-  if (buttonPushCounter1 == 0 && runOnce == true) {
+  if (buttonPushCounter1 == 1 && runOnce == true) {
     Serial.println("BBC 1 HD"); 
     irsend.sendRC6(0xC00C01, 24); // Send to IR LED
     delay(200);
@@ -160,7 +159,7 @@ void loop()
     digitalWrite(ledPin1, LOW);
   }
   
-  if (buttonPushCounter1 == 1 && runOnce == true) {
+  if (buttonPushCounter1 == 2 && runOnce == true) {
     Serial.println("BBC 2 HD"); 
     irsend.sendRC6(0xC00C01, 24); // Send to IR LED
     delay(200);
@@ -171,7 +170,7 @@ void loop()
     digitalWrite(ledPin1, LOW);
   }
 
-  if (buttonPushCounter1 == 2 && runOnce == true) {
+  if (buttonPushCounter1 == 3 && runOnce == true) {
     Serial.println("ITV HD"); 
     irsend.sendRC6(0xC00C01, 24); // Send to IR LED
     delay(200);
@@ -182,7 +181,7 @@ void loop()
     digitalWrite(ledPin1, LOW);
   }
 
-  if (buttonPushCounter1 == 3 && runOnce == true) {
+  if (buttonPushCounter1 == 4 && runOnce == true) {
     Serial.println("Channel 4 HD"); 
     irsend.sendRC6(0xC00C02, 24); // Send to IR LED
     delay(200);
@@ -193,7 +192,7 @@ void loop()
     digitalWrite(ledPin1, LOW);
   }
 
-  if (buttonPushCounter1 == 4 && runOnce == true) {
+  if (buttonPushCounter1 == 5 && runOnce == true) {
     Serial.println("Channel 5 HD"); 
     irsend.sendRC6(0xC00C01, 24); // Send to IR LED
     delay(200);
