@@ -163,9 +163,9 @@ void loop()
     Serial.println("BBC 2 HD"); 
     irsend.sendRC6(0xC00C01, 24); // Send to IR LED
     delay(200);
-    irsend.sendRC6(0xC00C04, 24); // Send to IR LED
+    irsend.sendRC6(0xC00C00, 24); // Send to IR LED
     delay(200);
-    irsend.sendRC6(0xC00C01, 24); // Send to IR LED
+    irsend.sendRC6(0xC00C02, 24); // Send to IR LED
     runOnce = false;
     digitalWrite(ledPin1, LOW);
   }
@@ -196,9 +196,9 @@ void loop()
     Serial.println("Channel 5 HD"); 
     irsend.sendRC6(0xC00C01, 24); // Send to IR LED
     delay(200);
-    irsend.sendRC6(0xC00C07, 24); // Send to IR LED
+    irsend.sendRC6(0xC00C00, 24); // Send to IR LED
     delay(200);
-    irsend.sendRC6(0xC00C01, 24); // Send to IR LED
+    irsend.sendRC6(0xC00C05, 24); // Send to IR LED
     runOnce = false;
     digitalWrite(ledPin1, LOW);
   }
