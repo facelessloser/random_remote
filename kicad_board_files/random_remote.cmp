@@ -1,0 +1,73 @@
+Cmp-Mod V01 Created by CvPcb (22-Jun-2014 BZR 4027)-stable date = Sun 15 May 2016 19:53:18 BST
+
+BeginCmp
+TimeStamp = /57260EC7;
+Reference = D1;
+ValeurCmp = LED;
+IdModule  = LED-3MM;
+EndCmp
+
+BeginCmp
+TimeStamp = /57260E9A;
+Reference = D2;
+ValeurCmp = LED;
+IdModule  = LED-3MM;
+EndCmp
+
+BeginCmp
+TimeStamp = /573756C8;
+Reference = D3;
+ValeurCmp = DIODE;
+IdModule  = D3;
+EndCmp
+
+BeginCmp
+TimeStamp = /5738BE20;
+Reference = Q1;
+ValeurCmp = PZT2222A;
+IdModule  = 2N2222;
+EndCmp
+
+BeginCmp
+TimeStamp = /5726494E;
+Reference = SW1;
+ValeurCmp = SWITCH_INV;
+IdModule  = 2_pin_misc_custom;
+EndCmp
+
+BeginCmp
+TimeStamp = /57260ED6;
+Reference = SW2;
+ValeurCmp = SW_PUSH;
+IdModule  = 2_pin_misc_custom;
+EndCmp
+
+BeginCmp
+TimeStamp = /57260E8B;
+Reference = U1;
+ValeurCmp = ARDUINO_PRO_MICRO;
+IdModule  = arduino_leonardo;
+EndCmp
+
+BeginCmp
+TimeStamp = /57260EB8;
+Reference = U2;
+ValeurCmp = LIPO_CHARGER;
+IdModule  = Lipo_charger_custom;
+EndCmp
+
+BeginCmp
+TimeStamp = /57260EA9;
+Reference = U3;
+ValeurCmp = DC-DC_BOOSTER;
+IdModule  = DC-DC_boost;
+EndCmp
+
+BeginCmp
+TimeStamp = /5738C5C2;
+Reference = U4;
+ValeurCmp = BATTERY_CUSTOM;
+IdModule  = 2_pin_misc_custom;
+EndCmp
+
+EndListe
